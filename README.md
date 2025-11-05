@@ -1,6 +1,4 @@
 
-# Demo 
-https://simplec0de.github.io/portfolio-01/
 
 # Modern Portfolio Template
 
@@ -133,6 +131,3 @@ npm run build
 - Node.js 18+
 - npm 7+
 
-## 📄 License
-
-MIT License - feel free to use this template for your portfolio!
