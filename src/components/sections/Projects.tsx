@@ -10,6 +10,7 @@ const ProjectsSection = styled.section`
   justify-content: center;
   position: relative;
   padding: ${theme.spacing.lg} 0;
+  scroll-margin-top: 96px; /* helpful if you have a sticky header */
 
   @media (min-width: ${theme.breakpoints.md}) {
     padding: ${theme.spacing.xl} 0;
@@ -63,6 +64,8 @@ const ProjectCard = styled(motion.div)`
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 0;
 
   &:hover {
     transform: translateY(-5px);
@@ -90,6 +93,7 @@ const ProjectImage = styled.div<{ imageUrl: string }>`
     width: 100%;
     height: 40%;
     background: linear-gradient(to top, ${theme.colors.glass.card}, transparent);
+    pointer-events: none; /* ensure overlay doesn't block clicks */
   }
 `;
 
@@ -159,7 +163,9 @@ const ProjectLinks = styled.div`
   margin-top: auto;
   padding-top: ${theme.spacing.md};
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  
+  position: relative;
+  z-index: 2;
+
   a {
     color: ${theme.colors.accent};
     font-size: clamp(1rem, 2vw, 1.2rem);
@@ -175,24 +181,64 @@ const ProjectLinks = styled.div`
   }
 `;
 
+/**
+ * Replace demo "projects" with your WORK EXPERIENCE.
+ * - title: Role @ Company
+ * - description: concise impact summary (from your resume bullets)
+ * - image: logo/photo/placeholder
+ * - techStack: tools/skills you used
+ * - githubUrl/liveUrl: company, case study, LinkedIn, or portfolio link
+ */
 const projects = [
   {
     id: 1,
-    title: "Project One",
-    description: "A full-stack web application with real-time features and modern UI/UX design.",
-    image: "https://via.placeholder.com/400x200",
-    techStack: ["React", "Node.js", "MongoDB", "Socket.IO"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "Sports Analytics & SEO Co-op @ FOX Sports",
+    description:
+      "Optimized digital sports content with editorial, product, and engineering; built dashboards for user behavior and performance; executed keyword research, title optimizations, content gap analysis, and trend tracking to improve rankings.",
+    image: "https://via.placeholder.com/800x440?text=FOX+Sports",
+    techStack: ["Adobe Analytics", "Tableau", "SEO", "Dashboards", "Cross-functional"],
+    githubUrl: "",
+    liveUrl: "https://www.foxsports.com",
   },
   {
     id: 2,
-    title: "Project Two",
-    description: "Mobile-first e-commerce platform with seamless payment integration.",
-    image: "https://via.placeholder.com/400x200",
-    techStack: ["Next.js", "TypeScript", "Stripe", "Tailwind"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    title: "Creative Design Intern @ The Cincy Hat Project (Ted Karras)",
+    description:
+      "Designed branded merchandise mockups (Illustrator/Canva) for a player-led community initiative. Presented concepts at a client-facing event; supported brand expansion with fast-turn proposals and collaboration.",
+    image: "https://via.placeholder.com/800x440?text=Cincy+Hat+Project",
+    techStack: ["Adobe Illustrator", "Canva Pro", "Brand Design", "Presentation", "Collaboration"],
+    githubUrl: "",
+    liveUrl: "https://example.com", // replace with official link if desired
+  },
+  {
+    id: 3,
+    title: "Operations & Applied Data Analyst Co-op @ AMEND Consulting",
+    description:
+      "Implemented automation to improve financial reporting accuracy and efficiency; streamlined A/P processes to reduce manual tasks and increase controls; built certified data models enabling self-serve BI.",
+    image: "https://via.placeholder.com/800x440?text=AMEND+Consulting",
+    techStack: ["Automation", "Data Modeling", "Finance Ops", "Power BI", "Tableau"],
+    githubUrl: "",
+    liveUrl: "https://www.amendllc.com",
+  },
+  {
+    id: 4,
+    title: "Infrastructure & Cloud Technology Co-op @ 84.51°",
+    description:
+      "Enhanced software delivery through automation, improving deployment clarity and efficiency and strengthening communication across technical and business teams.",
+    image: "https://via.placeholder.com/800x440?text=84.51%C2%B0",
+    techStack: ["DevOps", "Automation", "Process Improvement"],
+    githubUrl: "",
+    liveUrl: "https://www.8451.com",
+  },
+  {
+    id: 5,
+    title: "Co-Founder @ Adopt A Book Ohio",
+    description:
+      "Co-founded nonprofit donating new and gently used children's books; partnered with hundreds of organizations to donate 250,000+ books to 300+ places; recognized by Library of Congress and others.",
+    image: "https://via.placeholder.com/800x440?text=Adopt+A+Book+Ohio",
+    techStack: ["Nonprofit", "Leadership", "Operations", "Community", "Partnerships"],
+    githubUrl: "",
+    liveUrl: "https://adoptabookohio.org",
   },
 ];
 
@@ -229,8 +275,9 @@ const Projects = () => {
           role="heading"
           aria-level={2}
         >
-          Featured Projects
+          Projects
         </SectionTitle>
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -238,49 +285,55 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           <ProjectGrid role="list">
-          {projects.map((project) => (
-            <ProjectCard 
-              key={project.id} 
-              variants={itemVariants}
-              role="listitem"
-              aria-labelledby={`project-title-${project.id}`}
-            >
-              <ProjectImage 
-                imageUrl={project.image} 
-                role="img" 
-                aria-label={`Screenshot of ${project.title}`} 
-              />
-              <ProjectContent>
-                <ProjectTitle id={`project-title-${project.id}`}>{project.title}</ProjectTitle>
-                <ProjectDescription>{project.description}</ProjectDescription>
-                <TechStack role="list" aria-label={`Technologies used in ${project.title}`}>
-                  {project.techStack.map((tech) => (
-                    <TechTag key={tech} role="listitem">{tech}</TechTag>
-                  ))}
-                </TechStack>
-                <ProjectLinks>
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    aria-label={`View ${project.title} source code on GitHub`}
-                  >
-                    <FaGithub aria-hidden="true" />
-                    <span className="sr-only">GitHub repository</span>
-                  </a>
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    aria-label={`Visit ${project.title} live site`}
-                  >
-                    <FaExternalLinkAlt aria-hidden="true" />
-                    <span className="sr-only">Live site</span>
-                  </a>
-                </ProjectLinks>
-              </ProjectContent>
-            </ProjectCard>
-          ))}
+            {projects.map((project) => (
+              <ProjectCard 
+                key={project.id} 
+                variants={itemVariants}
+                role="listitem"
+                aria-labelledby={`project-title-${project.id}`}
+              >
+                <ProjectImage 
+                  imageUrl={project.image} 
+                  role="img" 
+                  aria-label={`Screenshot of ${project.title}`} 
+                />
+                <ProjectContent>
+                  <ProjectTitle id={`project-title-${project.id}`}>{project.title}</ProjectTitle>
+                  <ProjectDescription>{project.description}</ProjectDescription>
+
+                  <TechStack role="list" aria-label={`Technologies used in ${project.title}`}>
+                    {project.techStack.map((tech) => (
+                      <TechTag key={tech} role="listitem">{tech}</TechTag>
+                    ))}
+                  </TechStack>
+
+                  <ProjectLinks>
+                    {Boolean(project.githubUrl?.trim()) && (
+                      <a 
+                        href={project.githubUrl!} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`View ${project.title} source code on GitHub`}
+                      >
+                        <FaGithub aria-hidden="true" />
+                        <span className="sr-only">GitHub repository</span>
+                      </a>
+                    )}
+                    {Boolean(project.liveUrl?.trim()) && (
+                      <a 
+                        href={project.liveUrl!} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`Visit ${project.title} live site`}
+                      >
+                        <FaExternalLinkAlt aria-hidden="true" />
+                        <span className="sr-only">Live site</span>
+                      </a>
+                    )}
+                  </ProjectLinks>
+                </ProjectContent>
+              </ProjectCard>
+            ))}
           </ProjectGrid>
         </motion.div>
       </div>

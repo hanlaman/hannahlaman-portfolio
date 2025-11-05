@@ -1,13 +1,14 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'; 
 import { motion } from 'framer-motion';
 import { theme } from '../../styles/theme';
 import { 
   FaReact, 
   FaNodeJs, 
-  FaDatabase, 
   FaDocker,
   FaGitAlt,
-  FaAws
+  FaAws,
+  FaChartLine,   // generic analytics/SEO
+  FaPalette      // design/brand
 } from 'react-icons/fa';
 import { 
   SiTypescript,
@@ -15,7 +16,12 @@ import {
   SiPython,
   SiMongodb,
   SiPostgresql,
-  SiRedux
+  SiRedux,
+  SiTableau,
+  SiWordpress,
+  SiAdobe,
+  SiAdobeillustrator,
+  SiCanva,      
 } from 'react-icons/si';
 
 const SkillsSection = styled.section`
@@ -160,26 +166,47 @@ const skillCategories = [
       { name: 'TypeScript', icon: <SiTypescript /> },
       { name: 'JavaScript', icon: <SiJavascript /> },
       { name: 'Redux', icon: <SiRedux /> },
+      { name: 'WordPress CMS', icon: <SiWordpress /> },
     ],
   },
   {
-    title: 'Backend',
+    title: 'Backend & Data',
     icon: <FaNodeJs />,
     skills: [
       { name: 'Node.js', icon: <FaNodeJs /> },
       { name: 'Python', icon: <SiPython /> },
-      { name: 'MongoDB', icon: <SiMongodb /> },
       { name: 'PostgreSQL', icon: <SiPostgresql /> },
+      { name: 'MongoDB', icon: <SiMongodb /> },
+      { name: 'SQL', icon: <SiPostgresql /> }, // generic SQL (using Postgres icon)
     ],
   },
   {
-    title: 'DevOps',
+    title: 'Analytics & SEO',
+    icon: <FaChartLine />,
+    skills: [
+      { name: 'Adobe Analytics', icon: <SiAdobe /> },   // brand-level Adobe icon
+      { name: 'Tableau', icon: <SiTableau /> },
+      { name: 'SEO Strategy', icon: <FaChartLine /> },
+    ],
+  },
+  {
+    title: 'Design & Content',
+    icon: <FaPalette />,
+    skills: [
+      { name: 'Adobe Illustrator', icon: <SiAdobeillustrator /> },
+      { name: 'Adobe Suite', icon: <SiAdobe /> },
+      { name: 'Canva Pro', icon: <SiCanva /> },
+      { name: 'Brand Design', icon: <FaPalette /> },
+    ],
+  },
+  {
+    title: 'DevOps & Workflow',
     icon: <FaDocker />,
     skills: [
       { name: 'Docker', icon: <FaDocker /> },
-      { name: 'Git', icon: <FaGitAlt /> },
+      { name: 'Git / GitHub', icon: <FaGitAlt /> },
       { name: 'AWS', icon: <FaAws /> },
-      { name: 'CI/CD', icon: <FaDatabase /> },
+      { name: 'CI/CD', icon: <FaGitAlt /> },
     ],
   },
 ];
@@ -189,9 +216,7 @@ const Skills = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
@@ -200,9 +225,7 @@ const Skills = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-      },
+      transition: { duration: 0.5 },
     },
   };
 
@@ -227,7 +250,7 @@ const Skills = () => {
         <SkillsContainer role="list">
           {skillCategories.map((category, index) => (
             <SkillCategory 
-              key={index} 
+              key={index}
               variants={itemVariants}
               role="listitem"
               aria-labelledby={`category-title-${index}`}
@@ -239,7 +262,7 @@ const Skills = () => {
               <SkillsList role="list" aria-label={`${category.title} skills`}>
                 {category.skills.map((skill, skillIndex) => (
                   <SkillItem 
-                    key={skillIndex} 
+                    key={skillIndex}
                     variants={itemVariants}
                     role="listitem"
                   >

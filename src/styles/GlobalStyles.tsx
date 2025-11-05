@@ -192,6 +192,28 @@ const globalStyles = css`
     white-space: nowrap;
     border: 0;
   }
+
+  /* Glassmorphism utilities */
+  /*
+    Use the .glass utility on containers that should have the frosted glass effect.
+    It uses theme colors from theme.colors.glass.*. If those tokens are hex values,
+    consider updating them to rgba() in theme.ts for better translucency control.
+  */
+  .glass {
+    background: ${theme.colors.glass.background};
+    border: 1px solid ${theme.colors.glass.border};
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.28);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* A padding + layout helper when using glass cards */
+  .glass-card {
+    padding: ${theme.spacing.md};
+    background-clip: padding-box; /* keeps the translucent background inside rounded corners */
+  }
 `;
 
 export const GlobalStyles = () => <Global styles={globalStyles} />;
