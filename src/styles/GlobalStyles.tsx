@@ -2,7 +2,7 @@ import { Global, css } from '@emotion/react';
 import { theme } from './theme';
 
 const globalStyles = css`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@400;600;700&display=swap');
 
   *, *::before, *::after {
     margin: 0;
@@ -28,8 +28,6 @@ const globalStyles = css`
     -moz-osx-font-smoothing: grayscale;
     background: ${theme.colors.gradient.main};
     background-attachment: fixed;
-    /* Visual style: render site text in uppercase. Exceptions below preserve case where needed. */
-    text-transform: uppercase;
   }
 
   #root {
@@ -195,18 +193,7 @@ const globalStyles = css`
     border: 0;
   }
 
-  /* Preserve original case for form fields, code, and other technical text */
-  input,
-  textarea,
-  select,
-  pre,
-  code,
-  kbd,
-  samp,
-  .sr-only,
-  a[href^="mailto:"] {
-    text-transform: none !important;
-  }
+  /* No global text-transform — keep original case for readability; headings use the heading font. */
 
   /* Glassmorphism utilities */
   /*

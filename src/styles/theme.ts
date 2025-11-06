@@ -26,8 +26,8 @@ export const theme = {
   },
 
   fonts: {
-    body: "'Futura', 'Inter', sans-serif",          // clean, geometric body
-    heading: "'Garamond', 'Playfair Display', serif", // refined serif for editorial flair
+    body: "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    heading: "'Syne', 'Garamond', 'Playfair Display', serif",
   },
 
   breakpoints: {
