@@ -216,7 +216,7 @@ export const FloatingNav = () => {
         role="navigation"
         aria-label="Section navigation"
       >
-        {sections.filter(s => s.id !== 'education').map(({ id, name }) => (
+  {sections.map(({ id, name }) => (
           <NavDot
             key={id}
             active={activeSection === id}
@@ -231,38 +231,9 @@ export const FloatingNav = () => {
             role="button"
           />
         ))}
-        {/* Education bubble (labelled pill) */}
-        <NavBubble
-          onClick={() => document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' })}
-          aria-label="Jump to Education"
-          title="Education"
-        >
-          Education
-        </NavBubble>
       </NavContainer>
     </>
   );
 };
 
-const NavBubble = styled.button`
-  margin-top: ${theme.spacing.md};
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: ${theme.colors.accent};
-  color: ${theme.colors.textDark};
-  font-weight: 600;
-  font-size: 0.9rem;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(2,6,23,0.18);
-  transition: transform ${theme.transitions.default}, box-shadow ${theme.transitions.default};
 
-  @media (max-width: ${theme.breakpoints.sm}) {
-    display: none; /* hide pill on small screens to avoid clutter */
-  }
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(2,6,23,0.2);
-  }
-`;
