@@ -224,7 +224,8 @@ export const FloatingNav = () => {
             active={activeSection === id}
             onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
             onKeyDown={(e: React.KeyboardEvent) => handleKeyDown(e, id)}
-            data-tooltip={name}
+            /* keep screen-reader label but hide visible tooltip for education so the dot stays blank */
+            data-tooltip={id === 'education' ? '' : name}
             tabIndex={0}
             aria-label={`${name} section ${activeSection === id ? '(current section)' : ''}`}
             aria-current={activeSection === id ? 'true' : undefined}
