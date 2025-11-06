@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { theme } from '../../styles/theme';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const NavContainer = styled(motion.nav)`
   position: fixed;
@@ -114,6 +114,35 @@ const NavDot = styled(motion.button)<{ active: boolean }>`
   }
 `;
 
+// Labelled bubble styled to visually match the NavDot while showing text
+const NavBubble = styled(NavDot)`
+  width: auto;
+  height: auto;
+  padding: 6px 12px;
+  min-width: 64px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => (props.active ? theme.colors.accent : 'rgba(255, 255, 255, 0.08)')};
+  color: ${props => (props.active ? theme.colors.textDark : theme.colors.light)};
+  border: 2px solid ${props => (props.active ? theme.colors.accent : 'rgba(255,255,255,0.12)')};
+  box-shadow: ${props => (props.active ? '0 10px 30px rgba(246,177,122,0.18)' : '0 6px 18px rgba(2,6,23,0.12)')};
+
+  &:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+
+  &::before {
+    /* keep tooltip behavior but slightly adjusted for bubble */
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+`;
+
 const ProgressBar = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -216,20 +245,38 @@ export const FloatingNav = () => {
         role="navigation"
         aria-label="Section navigation"
       >
-  {sections.map(({ id, name }) => (
-          <NavDot
-            key={id}
-            active={activeSection === id}
-            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
-            onKeyDown={(e) => handleKeyDown(e, id)}
-            data-tooltip={name}
-            tabIndex={0}
-            aria-label={`${name} section ${activeSection === id ? '(current section)' : ''}`}
-            aria-current={activeSection === id ? 'true' : undefined}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            role="button"
-          />
+        {sections.map(({ id, name }) => (
+          id === 'education' ? (
+            <NavBubble
+              key={id}
+              active={activeSection === id}
+              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
+              onKeyDown={(e) => handleKeyDown(e, id)}
+              data-tooltip={name}
+              tabIndex={0}
+              aria-label={`${name} section ${activeSection === id ? '(current section)' : ''}`}
+              aria-current={activeSection === id ? 'true' : undefined}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              role="button"
+            >
+              {name}
+            </NavBubble>
+          ) : (
+            <NavDot
+              key={id}
+              active={activeSection === id}
+              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
+              onKeyDown={(e) => handleKeyDown(e, id)}
+              data-tooltip={name}
+              tabIndex={0}
+              aria-label={`${name} section ${activeSection === id ? '(current section)' : ''}`}
+              aria-current={activeSection === id ? 'true' : undefined}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              role="button"
+            />
+          )
         ))}
       </NavContainer>
     </>
