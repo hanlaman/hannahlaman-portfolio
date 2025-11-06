@@ -216,7 +216,7 @@ export const FloatingNav = () => {
         role="navigation"
         aria-label="Section navigation"
       >
-        {sections.map(({ id, name }) => (
+        {sections.filter(s => s.id !== 'education').map(({ id, name }) => (
           <NavDot
             key={id}
             active={activeSection === id}
