@@ -28,6 +28,8 @@ const globalStyles = css`
     -moz-osx-font-smoothing: grayscale;
     background: ${theme.colors.gradient.main};
     background-attachment: fixed;
+    /* Visual style: render site text in uppercase. Exceptions below preserve case where needed. */
+    text-transform: uppercase;
   }
 
   #root {
@@ -191,6 +193,19 @@ const globalStyles = css`
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+  }
+
+  /* Preserve original case for form fields, code, and other technical text */
+  input,
+  textarea,
+  select,
+  pre,
+  code,
+  kbd,
+  samp,
+  .sr-only,
+  a[href^="mailto:"] {
+    text-transform: none !important;
   }
 
   /* Glassmorphism utilities */
