@@ -130,11 +130,10 @@ export const Hero = () => {
               Hi, I'm Hannah Laman.
             </Title>
             <Subtitle role="heading" aria-level={3}>
-              Analytics & SEO, Brand Marketing
+              B.S Computer Science + M.B.A Student
             </Subtitle>
             <Description role="paragraph">
-              I develop modern, data-informed digital experiences—transforming complex insights into elegant, 
-              user-friendly solutions built on clean code and clear design.
+              Aspiring analyst with experience in sports analytics, SEO, marketing analytics, and branding.
             </Description>
             <SocialLinks role="list" aria-label="Social media links">
               <a 

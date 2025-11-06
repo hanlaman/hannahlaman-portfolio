@@ -105,10 +105,10 @@ const Highlights = styled.ul`
 
 const education = [
   {
-    id: 1,
+    id: 2,
     degree: 'M.B.A. — ACCEND Program',
     institution: 'University of Cincinnati, Cincinnati, OH',
-    dateRange: 'Expected May 2026',
+    dateRange: '2023 - May 2026',
     highlights: [
       'Graduate GPA: 3.8',
       'Relevant Coursework (Graduate): Managerial Economics; Leadership and Organizations; Decision Modeling; Corporate Legal and Social Responsibility',
@@ -116,10 +116,10 @@ const education = [
     ]
   },
   {
-    id: 2,
+    id: 1,
     degree: 'B.S. — Computer Science',
     institution: 'University of Cincinnati, Cincinnati, OH',
-    dateRange: '2019 — 2023',
+    dateRange: '2021 - 2026',
     highlights: [
       'Undergraduate GPA: 3.5',
       'Relevant Coursework (Undergraduate): Software Testing and QA; Operating Systems; Artificial Intelligence and Cloud Computing; Software Engineering; Technical and Scientific Writing'
